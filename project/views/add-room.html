@@ -1,0 +1,59 @@
+<%- include('parts/header')%>
+<%- include('parts/navbar')%>
+
+<div class="container text-center">
+
+    <% if(roomAdded) { %>
+    <p class="alert alert-success">
+        roomAdded added successfully
+    </p>
+    <% } %>
+
+    <h3>Add Room</h3>
+    <form action="/admin/add" method="POST" enctype="multipart/form-data"> <%//نوع التشفير بستخدمه هنا عشان الفورم بتاعتي فيها ملفات ومتعدد الاجزاء جاية عشان الفورم فيها نص وفيها داتا باينري والجهاز هيحولها ل بفر ويتعامل مع البفر انه مجموعة من الباينري كود ال بتمثل الملف بتاعي  %>
+        <input type="text" class="form-control" name="name" placeholder="Name">
+        <% let nameError = validationErrors.find(err => err.param === 'name') %>
+        <% if (nameError) { %>
+            <p class="alert alert-danger">
+                <%= nameError.msg %>
+            </p>
+        <% } %>
+        <input type="number" class="form-control" name="price" placeholder="Price">
+        <% let priceError = validationErrors.find(err => err.param === 'price') %>
+        <% if (priceError) { %>
+            <p class="alert alert-danger">
+                <%= priceError.msg %>
+            </p>
+        <% } %>
+        <textarea type="password" class="form-control" name="description" placeholder="Description"></textarea>
+        <% let descriptionError = validationErrors.find(err => err.param === 'description') %>
+        <% if (descriptionError) { %>
+            <p class="alert alert-danger">
+                <%= descriptionError.msg %>
+            </p>
+        <% } %>
+        <select type="password" class="form-control" name="category">
+            <option value="" selected>Choose a category</option>
+            <option value="single">single</option>
+            <option value="couple">couple</option>
+            <option value="family">family</option>
+            <option value="mulity">mulity</option>
+        </select>
+        <% let categoryError = validationErrors.find(err => err.param === 'category') %>
+        <% if (categoryError) { %>
+            <p class="alert alert-danger">
+                <%= categoryError.msg %>
+            </p>
+        <% } %>
+        <input type="file" class="form-control" name="image" placeholder="Image">
+        <% let imageError = validationErrors.find(err => err.param === 'image') %>
+        <% if (imageError) { %>
+            <p class="alert alert-danger">
+                <%= imageError.msg %>
+            </p>
+        <% } %>
+        <input type="submit" value="Add Room" class="btn btn-primary">
+    </form>
+</div>
+
+<%- include('parts/footer')%>
